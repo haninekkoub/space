@@ -10,3 +10,24 @@
     font-family: "DisketRegular";
     src: url("../font/Disket-Mono-Regular.ttf");
 }
+
+.debug {
+  @apply text-purple-600;
+}
+
+.circle {
+  @apply  border-red-500;
+
+}
+
+  .dot {
+    @apply absolute w-2 h-[90%] top-[6%] left-[48%] rotate-0 origin-center;
+
+  }
+
+.dot:before {
+  content: "";
+  @apply absolute top-0 -left-1/2 bg-white rounded-full cursor-pointer;
+  width: 200%;
+  padding-bottom: 200%;
+}

@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, animate, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface Age {
@@ -10,21 +10,76 @@ interface CalculProps {
   planetSecInDays: number;
   planetDaysInYear: number;
   planetName: string;
+  planetColor: any;
   text: string;
   day: number;
   month: number;
   year: number;
 }
 
+
+
 export default function Calcul({
   planetSecInDays,
   planetDaysInYear,
   planetName,
+  planetColor,
   text,
   day,
   month,
   year,
+
 }: CalculProps) {
+
+  const container = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1, 
+      transition: { 
+        duration: 1,
+        when: "beforeChildren",
+        staggerChildren: 0.2
+      }
+    },
+    exit: {
+      opacity: 0, 
+      transition: { 
+        duration: 1 
+      }
+    }
+  }
+  const title = {
+    initial: {
+      color: `${planetColor}`,
+    }
+}
+  const number = {
+    initial: {
+      color: `${planetColor}`,
+      opacity: 0, 
+      transition: { 
+        duration: 1 
+      }
+    },
+    animate: {
+      opacity: 1, 
+      transition: { 
+        delay: 1,
+        duration: 1 
+      }
+    },
+    exit: {
+      opacity: 0, 
+      transition: { 
+        delay: 1,
+        duration: 1 
+      }
+    }
+  }
+
+
   const [age, setAge] = useState<Age>({ years: 0, days: 0 });
   const [nextBirthday, setNextBirthday] = useState<Date | null>(null);
 
@@ -62,22 +117,35 @@ export default function Calcul({
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0, y: 0 }}
-        animate={{ opacity: 1, transition: { duration: 1 } }}
-        exit={{ opacity: 0, transition: { duration: 1 } }}
+        className="flex justify-around items-center gap-5 w-full"
+        variants={container}
+        initial="initial"
+        animate="animate"
+        exit="exit"
       >
-        <motion.p>{text}</motion.p>
-        <p>
-          You are {age.years} {planetName} years and {age.days} {planetName}{" "}
-          days old.
-        </p>
-
-        {nextBirthday && (
-          <p>
-            Your next birthday on {planetName} is on{" "}
-            {nextBirthday.toDateString()}.
+        <motion.div className= "flex flex-col gap-2 justify-center items-center font-DisketBold text-white w-[35vw]">
+          <motion.h1 variants={title} className= "text-[1.375rem]">
+            {planetName}
+          </motion.h1>
+          <p className="text-stretch text-sm">
+            {text}
           </p>
-        )}
+          </motion.div>
+        <div className="flex flex-col gap-4 justify-center items-start min-w-[20vw] font-DisketBold text-[1.125rem] text-white">
+          <p className=" ">You are :</p>
+          <div className="flex flex-col gap-2 place-self-end text-bold">
+            <p className= "text-sm">
+              <motion.span variants={number} className="text-[1.125rem] "> {age.years} </motion.span> {planetName} years.
+            </p>
+            <p className= "text-sm">
+            <motion.span variants={number} className="text-[1.125rem]"> {age.days} </motion.span> {planetName} days.
+            </p>
+          </div>
+          <p>Next birthday :</p>
+          {nextBirthday && (
+            <motion.p variants={number} className="place-self-end text-[1.125rem]">{nextBirthday.toDateString()}.</motion.p>
+          )}
+        </div>
       </motion.div>
     </AnimatePresence>
   );

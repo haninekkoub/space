@@ -24,7 +24,7 @@ export default function Form({ setDay, setMonth, setYear }: FormProps) {
 
   return (
     <>
-      <div className="min-h-[20vh] min-w-[50vw] flex justify-center items-center gap-4">
+      <div className="min-h-[20vh] min-w-[50vw] flex justify-center items-center gap-4 mb-8">
         <label>
           Day:
           <input
