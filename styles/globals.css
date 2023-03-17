@@ -12,11 +12,11 @@
 }
 
 .debug {
-  @apply text-purple-600;
+  @apply z-50;
 }
 
 .circle {
-  @apply  border-red-500;
+  @apply  z-10;
 
 }
 
@@ -27,7 +27,7 @@
 
 .dot:before {
   content: "";
-  @apply absolute top-0 -left-1/2 bg-white rounded-full cursor-pointer;
+  @apply absolute top-0 -left-1/2 bg-secondary rounded-full cursor-pointer;
   width: 200%;
   padding-bottom: 200%;
 }

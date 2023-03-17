@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { RadialeSlider } from "./radialeSlider";
 
 interface FormProps {
   setDay: (day: number) => void;
@@ -9,51 +10,70 @@ export default function Form({ setDay, setMonth, setYear }: FormProps) {
   const [day, setDayValue] = useState<number>(1);
   const [month, setMonthValue] = useState<number>(1);
   const [year, setYearValue] = useState<number>(2000);
+  const [inputValueDay, setInputValueDay] = useState("19");
+  const [inputValueMonth, setInputValueMonth] = useState("2");
+  const [inputValueYear, setInputValueYear] = useState("1999");
 
+ 
   useEffect(() => {
     setDay(day);
-  }, [day, setDay]);
-
+    const parsedDay = parseInt(inputValueDay);
+    setDayValue(parsedDay);
+  }, [day, setDay, inputValueDay, setDayValue]);
+  
   useEffect(() => {
     setMonth(month);
-  }, [month, setMonth]);
-
+    const parsedMonth = parseInt(inputValueMonth);
+    setMonthValue(parsedMonth);
+  }, [month, inputValueMonth, setMonth, setMonthValue]);
+  
   useEffect(() => {
     setYear(year);
-  }, [year, setYear]);
+    const yearValue = parseInt(inputValueYear);
+    setYearValue(yearValue);
+  }, [year, setYear, inputValueYear, setYearValue]);
+
 
   return (
-    <>
-      <div className="min-h-[20vh] min-w-[50vw] flex justify-center items-center gap-4 mb-8">
-        <label>
-          Day:
-          <input
-            type="number"
-            value={day}
-            min={1}
-            max={31}
-            onChange={(e) => setDayValue(parseInt(e.target.value))}
+    <div className=" flex gap-8 justify-center items-center min-h-[20vh] ">
+
+      <div className="flex flex-col justify-center items-center gap-4">
+        <div className="relative">
+          <RadialeSlider
+          max="31"
+          min="1"
+          id="day"
+          inputValue={inputValueDay}
+          setInputValue={setInputValueDay}
           />
-        </label>
-        <label>
-          Month:
-          <input
-            type="number"
-            value={month}
-            min={1}
-            max={12}
-            onChange={(e) => setMonthValue(parseInt(e.target.value))}
-          />
-        </label>
-        <label>
-          Year:
-          <input
-            type="number"
-            value={year}
-            onChange={(e) => setYearValue(parseInt(e.target.value))}
-          />
-        </label>
+          </div>
+          <input type="text" value={day} onChange={(e) => setDayValue(parseInt(e.target.value))}/>
       </div>
-    </>
+      <div className="flex flex-col justify-center items-center gap-4">
+        <div className="relative">
+          <RadialeSlider
+          max="12"
+          min="1"
+          id="month"
+          inputValue={inputValueMonth}
+          setInputValue={setInputValueMonth}
+          />
+        </div>
+        <input type="text" value={month} onChange={(e) => setMonthValue(parseInt(e.target.value))}/>
+      </div>
+      <div className="flex flex-col justify-center items-center gap-4">
+        <div className="relative">
+          <RadialeSlider
+            max="2023"
+            min="1970"
+            id="year"
+            inputValue={inputValueYear}
+            setInputValue={setInputValueYear}
+          />
+        </div>
+        <input type="text" value={year}  onChange={(e) => setYearValue(parseInt(e.target.value))}/>
+      </div>
+    </div>
   );
 }
+

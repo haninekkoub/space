@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Sun from "./sun";
-import { RadialeSlider } from "./radialeSlider";
+
 
 const container = {};
 
@@ -29,9 +29,10 @@ const fade = {
   },
 };
 export default function Layout({ children }: any) {
+
   return (
     <div className="bg-background h-[100vh] flex justify-center items-center w-full relative">
- <div className="bg-background h-[100vh] flex justify-center items-center w-full relative">
+<div className="bg-background h-[100vh] flex justify-center items-center w-full relative">
       <motion.div
         variants={container}
         initial="initial"
