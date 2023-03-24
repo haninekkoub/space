@@ -1,17 +1,18 @@
+
+import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 
-interface ElementWithSize extends Element {
-  offsetHeight: number;
-  offsetWidth: number;
-}
+
 interface RadialeSliderProps {
-  max: string;
-  min: string;
+  max: number;
+  min: number;
   id: string;
   inputValue: string;
   onChange?: (value: string) => void;
   setInputValue?: (value: string) => void;
 }
+
+
 
 export const RadialeSlider = ({   
   max,
@@ -19,8 +20,7 @@ export const RadialeSlider = ({
   id,
   onChange,
   inputValue,
-  setInputValue, 
-}: RadialeSliderProps) => {
+  setInputValue, }: RadialeSliderProps) => {
     const [debugValue, setDebugValue] = useState(Number(inputValue));
     useEffect(() => {
       setDebugValue(Number(inputValue));
@@ -72,7 +72,8 @@ export const RadialeSlider = ({
       }
 
       const debug = document.querySelector(`#${id} .debug`);
-      const debugValue = Math.max(Math.min(Math.floor((angle * parseInt(min)* parseInt(max)) / 360) + 1, parseInt(max)), parseInt(min));
+      const debugValue = Math.max(Math.min(Math.round((angle * (max - min)) / 360) + min, max), min);
+
       if (debug) {
         debug.innerHTML = debugValue.toString();
       }
@@ -108,23 +109,33 @@ export const RadialeSlider = ({
   }, [debugValue, onChange]);
   
   return (
-      <div
+      <motion.div
         id={id}
-        className="circle rounded-full relative border border-primary h-[8vw] w-[8vw]"
+        className="circle rounded-full relative border border-primary h-[8vw] w-[8vw] active:border-[#CDCDCF]"
         ref={circleRef}
         onMouseDown={handleMouseDown}
         onTouchStart={handleMouseDown}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.2 , delay: 1.8 }}
       >
         <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-sm font-DisketBold flex flex-col justify-center items-center select-none">
-          <div className="text-base text-primary opacity-0.5">{id}</div>
-          <div className="debug text-[#CDCDCF] ">1</div>
+          <motion.div className="text-base text-primary opacity-0.5"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 , delay: 5.2 }}
+                >{id}</motion.div>
+          <div className="debug text-[#CDCDCF] "></div>
         </div>
-        <div className="dot">
+        <motion.div className="dot"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 , delay: 5.2 }}
+                >
           <div className="dot-inner"></div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       
-
   );
 };
 

@@ -96,7 +96,7 @@ const choosePlanet = {
 const TabsDemo = ({ day, year, month }: any) => {
   return (
     <Tabs.Root
-      className="flex flex-col justify-center items-center gap-8 "
+      className="flex flex-col justify-center items-center gap-8"
       defaultValue="choose-planet"
     >
       <Tabs.List
@@ -154,7 +154,7 @@ const TabsDemo = ({ day, year, month }: any) => {
             </Tabs.Content>
           )
         )}
-        <Tabs.Content value="choose-planet" className="min-h-[20vh] w-[50vw] ">
+        <Tabs.Content value="choose-planet" className="h-[20vh] w-[50vw] ">
           <motion.h1 className="h-full w-full flex justify-center items-center pt-10 font-DisketBold text-white" variants={choosePlanet} initial="initial" animate="animate">
             enter you age and chose a planet
           </motion.h1>
