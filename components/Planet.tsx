@@ -93,7 +93,7 @@ export default function Planet({ name, planetColor }: any) {
 
   return (
     <motion.div
-      className="h-[15vh] flex flex-col justify-center gap-2 items-center mt-[calc(7.5vh-(2vw-0.5rem))]"
+      className="flex flex-col justify-center gap-2 items-center -mt-[2vw] w-[6vw] "
       variants={section}
       initial="initial"
       animate="animate"

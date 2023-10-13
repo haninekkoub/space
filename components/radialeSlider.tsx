@@ -1,31 +1,28 @@
-
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-
 
 interface RadialeSliderProps {
   max: number;
   min: number;
   id: string;
-  inputValue: string;
+  value: string;
   onChange?: (value: string) => void;
-  setInputValue?: (value: string) => void;
+  setValue?: (value: string) => void;
 }
 
-
-
-export const RadialeSlider = ({   
+export const RadialSlider = ({
   max,
   min,
   id,
   onChange,
-  inputValue,
-  setInputValue, }: RadialeSliderProps) => {
-    const [debugValue, setDebugValue] = useState(Number(inputValue));
-    useEffect(() => {
-      setDebugValue(Number(inputValue));
-    }, [inputValue]);
-  
+  value,
+  setValue,
+}: RadialeSliderProps) => {
+  const [debugValue, setDebugValue] = useState(Number(value));
+  useEffect(() => {
+    setDebugValue(Number(value));
+  }, [value]);
+
   const [isDragging, setIsDragging] = useState(false);
   const circleRef = useRef<HTMLDivElement>(null);
 
@@ -72,22 +69,23 @@ export const RadialeSlider = ({
       }
 
       const debug = document.querySelector(`#${id} .debug`);
-      const debugValue = Math.max(Math.min(Math.round((angle * (max - min)) / 360) + min, max), min);
+      const value = Math.max(
+        Math.min(Math.round((angle * (max - min)) / 360) + min, max),
+        min
+      );
 
       if (debug) {
-        debug.innerHTML = debugValue.toString();
+        debug.innerHTML = value.toString();
       }
-      setDebugValue(debugValue);
+      setDebugValue(value);
       if (onChange) {
-        onChange(debugValue.toString());
+        onChange(value.toString());
       }
-      if (setInputValue) {
-        setInputValue(debugValue.toString());
+      if (setValue) {
+        setValue(value.toString());
       }
     }
-
   };
-
 
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
@@ -107,35 +105,37 @@ export const RadialeSlider = ({
       onChange(debugValue.toString());
     }
   }, [debugValue, onChange]);
-  
+
   return (
-      <motion.div
-        id={id}
-        className="circle rounded-full relative border border-primary h-[8vw] w-[8vw] active:border-[#CDCDCF]"
-        ref={circleRef}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleMouseDown}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.2 , delay: 1.8 }}
-      >
-        <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-sm font-DisketBold flex flex-col justify-center items-center select-none">
-          <motion.div className="text-base text-primary opacity-0.5"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 , delay: 5.2 }}
-                >{id}</motion.div>
-          <div className="debug text-[#CDCDCF] "></div>
-        </div>
-        <motion.div className="dot"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 , delay: 5.2 }}
-                >
-          <div className="dot-inner"></div>
+    <motion.div
+      id={id}
+      className="circle rounded-full relative border border-primary h-[8vw] min-h-[100px] w-[8vw] min-w-[100px] active:border-[#CDCDCF]"
+      ref={circleRef}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleMouseDown}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 1.2, delay: 1.8 }}
+    >
+      <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-sm font-DisketBold flex flex-col justify-center items-center select-none">
+        <motion.div
+          className="text-base text-primary opacity-0.5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 5.2 }}
+        >
+          {id}
         </motion.div>
+        <div className="debug text-[#CDCDCF] "></div>
+      </div>
+      <motion.div
+        className="dot !md:before:min-w-[5px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 5.2 }}
+      >
+        <div className="dot-inner "></div>
       </motion.div>
-      
+    </motion.div>
   );
 };
-
