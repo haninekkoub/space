@@ -27,6 +27,18 @@ const fade = {
     },
   },
 };
+const mobile = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      delay: 2,
+      duration: 1.5,
+    },
+  },
+};
 export default function Layout({ children }: any) {
   return (
     <div className="bg-background h-[100vh] flex justify-center items-center w-full relative ">
@@ -66,12 +78,17 @@ export default function Layout({ children }: any) {
         />
       </motion.div>
       <div className="sm:block  hidden">{children}</div>
-      <div className="sm:hidden absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 font-DisketBold text-white  text-center">
+      <motion.div
+        variants={mobile}
+        initial="initial"
+        animate="animate"
+        className="sm:hidden absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 font-DisketBold text-white  text-center"
+      >
         Our mobile version is lost in space, but we&apos;re not going to let
         that stop us. We&apos;re still developing it, and we&apos;re hoping to
         launch it soon. In the meantime, why don&apos;t you check out our
         desktop site?
-      </div>
+      </motion.div>
       <div className="absolute top-1/2 -translate-y-1/2 left-[15px] sm:left-[3.75vw] ">
         <Sun />
       </div>
