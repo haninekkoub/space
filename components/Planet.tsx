@@ -93,7 +93,7 @@ export default function Planet({ name, planetColor }: any) {
 
   return (
     <motion.div
-      className="flex flex-col justify-center gap-2 items-center -mt-[2vw] w-[6vw] "
+      className="flex flex-col justify-center gap-2 items-center -mt-[3vw] lg:-mt-[2vw] w-[6vw] "
       variants={section}
       initial="initial"
       animate="animate"
@@ -101,7 +101,7 @@ export default function Planet({ name, planetColor }: any) {
       exit="exit"
     >
       <motion.div
-        className="relative h-[4vw] w-[4vw] rounded-full border"
+        className="relative h-[6vw] lg:h-[4vw] w-[6vw] lg:w-[4vw] rounded-full border"
         variants={container}
       >
         <motion.svg
@@ -116,7 +116,7 @@ export default function Planet({ name, planetColor }: any) {
         </motion.svg>
 
         <motion.div
-          className="h-[2.5vw] w-[2.5vw] border-[1px] border-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="h-[3.75vw] lg:h-[2.5vw] w-[3.75vw] lg:w-[2.5vw] border-[1px] border-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           variants={box}
         />
         <motion.div

@@ -131,7 +131,7 @@ const TabsDemo = ({ day, year, month }: any) => {
             },
             i: React.Key | null | undefined
           ) => (
-            <Tabs.Content value={planet.tab} className="w-[70vw]" key={i}>
+            <Tabs.Content value={planet.tab} className="w-[70vw] " key={i}>
               <div className="flex justify-center items-center">
                 <Calcul
                   PlanetYearInMilliseconds={planet.PlanetYearInMilliseconds}

@@ -128,10 +128,10 @@ export default function Calcul({
           <motion.h1 variants={title} className="text-[1.375rem]">
             {planetName}
           </motion.h1>
-          <p className="text-stretch text-sm">{text}</p>
+          <p className="text-stretch text-sm lg:text-sm">{text}</p>
         </motion.div>
         <div className="flex flex-col gap-4 justify-center items-start min-w-[20vw] font-DisketBold text-[1.125rem] text-white">
-          <p className=" ">You are :</p>
+          <p>You are :</p>
           <div className="flex flex-col gap-2 items-end w-full text-bold">
             <p className="text-sm">
               <motion.span variants={number} className="text-[1.125rem] mr-2">
